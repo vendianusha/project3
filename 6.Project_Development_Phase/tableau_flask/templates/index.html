@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="iRevolution: A Data-driven Exploration of Apple's iPhone Impact in India using Tableau">
+    <title>iRevolution | Apple iPhone Impact in India</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tableau Embedding API v3 -->
+    <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="#home" class="nav-logo">iRevolution</a>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#kpis">KPIs</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#story">Story</a></li>
+            <li><a href="#report">Report</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <span class="hero-badge">Tableau Public × Flask</span>
+            <h1>
+                <span class="gradient-text">iRevolution</span><br>
+                Apple's iPhone Impact in India
+            </h1>
+            <p>
+                A data-driven exploration of market penetration, sales trends,
+                user demographics, and the cultural impact of iPhone adoption
+                across India — powered by Tableau visualizations.
+            </p>
+            <div class="hero-buttons">
+                <a href="#dashboard" class="btn-primary">Explore Dashboard</a>
+                <a href="#story" class="btn-outline">View Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KPI SECTION ===== -->
+    <section class="section" id="kpis">
+        <div class="section-header fade-in">
+            <span class="section-label label-blue">Key Metrics</span>
+            <h2>At a Glance</h2>
+            <p>Snapshot of the Apple iPhone ecosystem in the Indian market</p>
+        </div>
+        <div class="kpi-grid fade-in" id="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon">📱</div>
+                <div class="kpi-value" id="kpi-products" data-target="62" data-suffix="+">0</div>
+                <div class="kpi-label">Apple Products</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">💰</div>
+                <div class="kpi-value" id="kpi-price" data-target="62" data-prefix="₹" data-suffix="K">0</div>
+                <div class="kpi-label">Avg Sale Price</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">⭐</div>
+                <div class="kpi-value" id="kpi-rating" data-target="4" data-suffix=".6">0</div>
+                <div class="kpi-label">Avg Star Rating</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">📈</div>
+                <div class="kpi-value" id="kpi-revenue" data-target="394" data-prefix="$" data-suffix="B">0</div>
+                <div class="kpi-label">Annual Revenue (2022)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="section" id="dashboard">
+        <div class="section-header fade-in">
+            <span class="section-label label-purple">Interactive Dashboard</span>
+            <h2>Data Dashboard</h2>
+            <p>Comprehensive view of iPhone market data across India with interactive filters and drill-down
+                capabilities</p>
+        </div>
+
+        <!-- Main Dashboard Embed -->
+        <div class="glass-card fade-in">
+            <h3>📊 iPhone India Market Dashboard</h3>
+            <p class="card-desc">Interactive Tableau dashboard with all key visualizations — filter by region, time
+                period, and product category</p>
+            <div class="tableau-embed-container">
+                <!-- ✅ REPLACE src with your Tableau Public Dashboard URL -->
+                <tableau-viz id="tableauDashboard"
+                    src="https://public.tableau.com/views/iRevolution_17710788040970/iRevolution" width="100%"
+                    height="750" toolbar="bottom" hide-tabs>
+                </tableau-viz>
+            </div>
+        </div>
+
+        <!-- Individual Visualizations Grid -->
+        <div class="viz-grid">
+
+            <!-- Battery Type Bar Chart -->
+            <div class="glass-card fade-in">
+                <h3>🔋 Battery Type Distribution</h3>
+                <p class="card-desc">Bar chart showing battery types across smartphone models</p>
+                <div class="tableau-embed-container">
+                    <!-- ✅ REPLACE src with your Battery Type viz URL -->
+                    <tableau-viz id="vizBattery"
+                        src="https://public.tableau.com/views/iRevolution_17710788040970/BatteryType" width="100%"
+                        height="500" toolbar="bottom" hide-tabs>
+                    </tableau-viz>
+                </div>
+            </div>
+
+            <!-- Brand-Price Treemap -->
+            <div class="glass-card fade-in">
+                <h3>🌳 Brand–Price Comparison</h3>
+                <p class="card-desc">Treemap showing price distribution across smartphone brands</p>
+                <div class="tableau-embed-container">
+                    <!-- ✅ REPLACE src with your Brand-Price Treemap URL -->
+                    <tableau-viz id="vizTreemap"
+                        src="https://public.tableau.com/views/iRevolution_17710788040970/BrandPriceTreeMap" width="100%"
+                        height="500" toolbar="bottom" hide-tabs>
+                    </tableau-viz>
+                </div>
+            </div>
+
+            <!-- Model-Wise Share Bubble Chart -->
+            <div class="glass-card fade-in">
+                <h3>🫧 Model-Wise Share of iPhone</h3>
+                <p class="card-desc">Bubble chart visualizing market share across iPhone models</p>
+                <div class="tableau-embed-container">
+                    <!-- ✅ REPLACE src with your Model Share Bubble Chart URL -->
+                    <tableau-viz id="vizModelShare"
+                        src="https://public.tableau.com/views/iRevolution_17710788040970/ModelShare" width="100%"
+                        height="500" toolbar="bottom" hide-tabs>
+                    </tableau-viz>
+                </div>
+            </div>
+
+            <!-- Country-Wise Lined Bar Chart -->
+            <div class="glass-card fade-in">
+                <h3>🌍 Country-Wise Best Selling Smartphone</h3>
+                <p class="card-desc">Lined bar chart comparing best-selling smartphones by country</p>
+                <div class="tableau-embed-container">
+                    <!-- ✅ REPLACE src with your Country-Wise Bar Chart URL -->
+                    <tableau-viz id="vizCountry"
+                        src="https://public.tableau.com/views/iRevolution_17710788040970/CountryWiseBestSellingSmartphones"
+                        width="100%" height="500" toolbar="bottom" hide-tabs>
+                    </tableau-viz>
+                </div>
+            </div>
+
+            <!-- Quarterly Share Pie Chart -->
+            <div class="glass-card fade-in">
+                <h3>🥧 Quarterly Market Share</h3>
+                <p class="card-desc">Pie chart showing iPhone quarterly market share trends</p>
+                <div class="tableau-embed-container">
+                    <!-- ✅ REPLACE src with your Quarterly Share Donut Chart URL -->
+                    <tableau-viz id="vizQuarterly"
+                        src="https://public.tableau.com/views/iRevolution_17710788040970/QuarterlyShare-2022"
+                        width="100%" height="500" toolbar="bottom" hide-tabs>
+                    </tableau-viz>
+                </div>
+            </div>
+
+            <!-- Annual Revenue Line Chart -->
+            <div class="glass-card fade-in">
+                <h3>📈 Annual Revenue Year-Wise</h3>
+                <p class="card-desc">Line chart tracking Apple's annual revenue over the years</p>
+                <div class="tableau-embed-container">
+                    <!-- ✅ REPLACE src with your Annual Revenue Line Chart URL -->
+                    <tableau-viz id="vizRevenue"
+                        src="https://public.tableau.com/views/iRevolution_17710788040970/AnnualRevenue" width="100%"
+                        height="500" toolbar="bottom" hide-tabs>
+                    </tableau-viz>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Global Market Share Map (Full Width) -->
+        <div class="glass-card fade-in" style="margin-top: 28px;">
+            <h3>🗺️ Global Market Share Map</h3>
+            <p class="card-desc">Choropleth map visualizing iPhone market share across different countries</p>
+            <div class="tableau-embed-container">
+                <!-- ✅ REPLACE src with your Global Market Map URL -->
+                <tableau-viz id="vizMap"
+                    src="https://public.tableau.com/views/iRevolution_17710788040970/GlobalMarketMap" width="100%"
+                    height="600" toolbar="bottom" hide-tabs>
+                </tableau-viz>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STORY ===== -->
+    <section class="section" id="story">
+        <div class="section-header fade-in">
+            <span class="section-label label-green">Data Story</span>
+            <h2>The iRevolution Story</h2>
+            <p>A narrative journey through the data, revealing key insights about Apple's iPhone journey in India</p>
+        </div>
+
+        <!-- Tableau Story Embed -->
+        <div class="glass-card fade-in">
+            <h3>📖 Interactive Tableau Story</h3>
+            <p class="card-desc">Navigate through multiple scenes to explore the iPhone's impact on India's smartphone
+                landscape</p>
+            <div class="tableau-embed-container">
+                <!-- ✅ REPLACE src with your Tableau Story URL -->
+                <tableau-viz id="tableauStory"
+                    src="https://public.tableau.com/views/iRevolution_17710788040970/iRevolution-iPhoneImpactinIndia"
+                    width="100%" height="650" toolbar="bottom">
+                </tableau-viz>
+            </div>
+        </div>
+
+        <!-- Story Scenes Outline -->
+        <div class="story-scenes fade-in">
+            <div class="scene-card">
+                <div class="scene-number">1</div>
+                <div class="scene-content">
+                    <h3>Market Entry & Penetration</h3>
+                    <p>How Apple entered the Indian market and its strategy for gaining foothold against dominant
+                        Android brands. From <strong>11.6 million units</strong> in 2008 to <strong>232 million</strong>
+                        in 2022, analyzing market penetration rates across metros and tier-2 cities.</p>
+                </div>
+            </div>
+            <div class="scene-card">
+                <div class="scene-number">2</div>
+                <div class="scene-content">
+                    <h3>Sales Trends & Revenue Growth</h3>
+                    <p>Year-over-year sales trends revealing explosive growth. Revenue grew from <strong>$19.1B
+                            (2006)</strong> to <strong>$394.3B (2022)</strong> — a 20x increase. The steepest growth
+                        came post-2020 with the "Made in India" initiative.</p>
+                </div>
+            </div>
+            <div class="scene-card">
+                <div class="scene-number">3</div>
+                <div class="scene-content">
+                    <h3>User Demographics & Preferences</h3>
+                    <p>Who buys iPhones in India? iPhone buyers skew towards the <strong>₹40K–₹80K price
+                            bracket</strong>. The iPhone 13 leads Flipkart with <strong>190K+ ratings</strong>.
+                        Preferences vary between North and South India.</p>
+                </div>
+            </div>
+            <div class="scene-card">
+                <div class="scene-number">4</div>
+                <div class="scene-content">
+                    <h3>Competitive Landscape</h3>
+                    <p>iPhone vs Samsung, Xiaomi, and other brands — <strong>Samsung (20%), Xiaomi (18%), and vivo
+                            (18%)</strong> dominate India's volume game. Apple competes on value — commanding the
+                        highest ASP among all brands.</p>
+                </div>
+            </div>
+            <div class="scene-card">
+                <div class="scene-number">5</div>
+                <div class="scene-content">
+                    <h3>Cultural & Social Media Impact</h3>
+                    <p>The iPhone as a cultural symbol in India — consistently <strong>4.5+ star ratings</strong> across
+                        models. iPhone 14 series commands <strong>17% US market share</strong> — the highest globally
+                        for any single smartphone line.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== REPORT ===== -->
+    <section class="section" id="report">
+        <div class="section-header fade-in">
+            <span class="section-label label-pink">Detailed Report</span>
+            <h2>Visualization Report</h2>
+            <p>Complete catalog of all visualizations with detailed information and analysis</p>
+        </div>
+
+        <!-- Model Specification Table (Dynamic from Flask API) -->
+        <div class="glass-card fade-in">
+            <h3>📋 Apple Products – Model Specifications</h3>
+            <p class="card-desc">Detailed specs comparison across iPhone models listed on Flipkart India</p>
+            <div class="table-controls">
+                <input type="text" id="productSearch" class="search-input" placeholder="🔍  Search by product name...">
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="report-table" id="productsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product Name</th>
+                            <th>Sale Price (₹)</th>
+                            <th>MRP (₹)</th>
+                            <th>Discount %</th>
+                            <th>Ratings</th>
+                            <th>Stars</th>
+                            <th>RAM</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsBody">
+                        <!-- Populated by JavaScript from /api/apple-products -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Visualizations Catalog Table -->
+        <div class="glass-card fade-in">
+            <h3>📊 Visualization Catalog</h3>
+            <p class="card-desc">Summary of all 9 unique visualizations created for this project</p>
+            <div style="overflow-x: auto;">
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Visualization</th>
+                            <th>Type</th>
+                            <th>Data Source</th>
+                            <th>Key Insight</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Key Performance Indicators</td>
+                            <td><span class="viz-type type-kpi">KPI</span></td>
+                            <td>apple_products</td>
+                            <td>Snapshot of product count, avg price, ratings &amp; revenue</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Model Specification</td>
+                            <td><span class="viz-type type-table">Table</span></td>
+                            <td>apple_products</td>
+                            <td>Detailed specs comparison across iPhone models</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Battery-Type Distribution</td>
+                            <td><span class="viz-type type-bar">Bar Chart</span></td>
+                            <td>Flipkart_smartphone</td>
+                            <td>Lithium-ion dominates; reveals battery tech adoption</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Brand–Price Comparison</td>
+                            <td><span class="viz-type type-tree">Treemap</span></td>
+                            <td>Flipkart_smartphone</td>
+                            <td>Price positioning of Apple vs competitors</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Model-Wise Share of iPhone</td>
+                            <td><span class="viz-type type-bubble">Bubble Chart</span></td>
+                            <td>Model-wise share</td>
+                            <td>iPhone 14 series leads; Pro Max tied at 17%</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Country-Wise Best Selling</td>
+                            <td><span class="viz-type type-bar">Lined Bar</span></td>
+                            <td>Country wise share</td>
+                            <td>Apple dominates US/Japan; Samsung leads India</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Quarterly Market Share</td>
+                            <td><span class="viz-type type-donut">Pie Chart</span></td>
+                            <td>Quarterly-share</td>
+                            <td>Samsung, Xiaomi, vivo dominate India market</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Annual Revenue Year-Wise</td>
+                            <td><span class="viz-type type-line">Line Chart</span></td>
+                            <td>Annual revenue</td>
+                            <td>Consistent growth; $394.3B in 2022</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Global Market Share Map</td>
+                            <td><span class="viz-type type-map">Map</span></td>
+                            <td>Market penetration</td>
+                            <td>Highest penetration in North America &amp; Europe</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+        <div class="section-header fade-in">
+            <span class="section-label label-blue">About Project</span>
+            <h2>About iRevolution</h2>
+            <p>Understanding the project scope, technology stack, and objectives</p>
+        </div>
+
+        <div class="viz-grid">
+            <div class="glass-card fade-in">
+                <h3>🎯 Problem Statement</h3>
+                <p class="card-desc" style="margin-bottom: 0; line-height: 1.8;">
+                    Investigate and visualize the influence of Apple's iPhone on the Indian market.
+                    Using Tableau's data visualization capabilities, the project explores market penetration,
+                    sales trends, user demographics, and cultural impact of iPhone adoption in India —
+                    providing insights for Apple, local competitors, and market analysts.
+                </p>
+            </div>
+            <div class="glass-card fade-in">
+                <h3>🛠️ Technology Stack</h3>
+                <p class="card-desc" style="margin-bottom: 0; line-height: 1.8;">
+                    <strong>Visualization:</strong> Tableau Public<br>
+                    <strong>Web Framework:</strong> Flask (Python)<br>
+                    <strong>Frontend:</strong> HTML, CSS, JavaScript<br>
+                    <strong>Template:</strong> Arsha-inspired (BootstrapMade)<br>
+                    <strong>Data Processing:</strong> pandas, Tableau Public<br>
+                    <strong>Embed API:</strong> Tableau Embedding API v3
+                </p>
+            </div>
+            <div class="glass-card fade-in">
+                <h3>📂 Data Sources</h3>
+                <p class="card-desc" style="margin-bottom: 0; line-height: 1.8;">
+                    7 datasets covering:<br>
+                    • Apple Products catalog (62 products, specs, prices, ratings)<br>
+                    • Flipkart Smartphone listings (836 models, 16 features)<br>
+                    • Annual Revenue figures (2006–2022)<br>
+                    • Market Penetration data (2008–2022)<br>
+                    • Country-wise market share (8 countries)<br>
+                    • Quarterly share breakdown (2017–2022)<br>
+                    • Model-wise share analysis (5 iPhone models)
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>© 2026 <strong>iRevolution</strong> — A Data-driven Exploration of Apple's iPhone Impact in India</p>
+        <p style="margin-top: 8px;">Built with <a href="https://flask.palletsprojects.com/" target="_blank">Flask</a>
+            &amp; <a href="https://public.tableau.com/" target="_blank">Tableau Public</a></p>
+    </footer>
+
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
